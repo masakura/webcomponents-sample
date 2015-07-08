@@ -1,0 +1,42 @@
+<template id="template1">
+  <div id="map-canvas" style="width: 500px; height: 300px;"></div>
+</template>
+<script>
+ var queue = [];
+
+ function initializeMap() {
+   queue.forEach(function (item) {
+     item();
+   });
+ };
+
+ var owner = document.currentScript.ownerDocument;
+
+ document.addEventListener('DOMContentLoaded', function () {
+   var script = owner.createElement('script');
+   script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD1_REBvlZH5RkerqDrmZ7Hzeq5RLpPPzI&callback=initializeMap';
+   script.async = true;
+   document.body.appendChild(script);
+ });
+
+ document.registerElement('masakura-map', {
+   prototype: Object.create(HTMLElement.prototype, {
+     createdCallback: {
+       value: function () {
+         var root = this.createShadowRoot();
+         var node = document.importNode(owner.querySelector('#template1').content, true);
+         root.appendChild(node);
+
+         var canvas = root.querySelector('#map-canvas');
+         queue.push(function () {
+           new google.maps.Map(canvas, {
+             zoom: 15,
+             center: new google.maps.LatLng(35.709984,139.810703),
+             mapTypeId: google.maps.MapTypeId.ROADMAP
+           });
+         });
+       }
+     }
+   })
+ });
+</script>

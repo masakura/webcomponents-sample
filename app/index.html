@@ -17,8 +17,21 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+
+    <link rel="import" href="components/masakura-map.html">
   </head>
   <body>
+    <script>
+     /*
+     var canvas = document.querySelector('#map-canvas');
+     var options = {
+       zoom: 15,
+       center: new google.maps.LatLng(35.709984,139.810703),
+       mapTypeId: google.maps.MapTypeId.ROADMAP
+     };
+     new google.maps.Map(canvas, options);
+     */
+    </script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
@@ -28,5 +41,7 @@
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
+
+    <masakura-map></masakura-map>
   </body>
 </html>
