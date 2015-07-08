@@ -27,11 +27,14 @@
          var node = document.importNode(owner.querySelector('#template1').content, true);
          root.appendChild(node);
 
+         var latitude = this.getAttribute('latitude');
+         var longitude = this.getAttribute('longitude');
+
          var canvas = root.querySelector('#map-canvas');
          queue.push(function () {
            new google.maps.Map(canvas, {
              zoom: 15,
-             center: new google.maps.LatLng(35.709984,139.810703),
+             center: new google.maps.LatLng(latitude, longitude),
              mapTypeId: google.maps.MapTypeId.ROADMAP
            });
          });
