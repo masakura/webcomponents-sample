@@ -1,5 +1,12 @@
 <template id="template1">
-  <div id="map-canvas" style="width: 500px; height: 300px;"></div>
+  <style>
+   div#base {
+     background-color: azure;
+   }
+  </style>
+  <div id="base" style="width: 100%; height:100%">
+    <div id="map-canvas" style="width: 95%; height: 95%;"></div>
+  </div>
 </template>
 <script>
  var queue = [];
@@ -32,12 +39,19 @@
 
          var canvas = root.querySelector('#map-canvas');
          queue.push(function () {
-           new google.maps.Map(canvas, {
+           this.map = new google.maps.Map(canvas, {
              zoom: 15,
              center: new google.maps.LatLng(latitude, longitude),
              mapTypeId: google.maps.MapTypeId.ROADMAP
            });
-         });
+         }.bind(this));
+       }
+     },
+     gotoOrigin: {
+       value: function () {
+         var latitude = this.getAttribute('latitude');
+         var longitude = this.getAttribute('longitude');
+         this.map.setCenter(new google.maps.LatLng(latitude, longitude));
        }
      }
    })
